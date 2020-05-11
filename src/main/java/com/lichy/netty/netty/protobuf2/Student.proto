@@ -1,0 +1,25 @@
+syntax = "proto3"; // 版本
+option optimize_for = SPEED; // 生成的外部类名同时也是文件名
+option java_package = "com.lichy.netty.netty.protobuf2"; // 生成的外部类名同时也是文件名
+option java_outer_classname = "DataPOJO"; // 生成的外部类名同时也是文件名
+
+message MyMessage {
+    enum DataType {
+        StudentType = 0;
+        WorkerType = 1;
+    }
+    DataType data_type = 1;// 第一个参数
+    oneof dataBody {
+        Student student = 2;
+        Worker worker =3;
+    }
+};
+
+message Student { // 会有一个DataPOJO外部类生成内部类Student，它是真正的POJO对象
+    int32 id = 1; // 这个1是顺序而不是值
+    string name = 2; // 第二个是名称
+};
+message Worker { // 会有一个DataPOJO外部类生成内部类Worker，它是真正的POJO对象
+    int32 name = 1; // 这个1是顺序而不是值
+    string age = 2; // 第二个是名称
+};
